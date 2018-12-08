@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:27:22 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/07 18:52:32 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/08 15:19:36 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,16 @@ int		ft_check_line(char *str)
 int		check_error_pieces(int fd)
 {
 	int		i;
+	int		nb_tetri;
 	int		ret;
 	t_bool 	end;
 	t_lst_f	*first;
 	t_lst_f	*lst;
-	int		*tab;
-	int		n;
+	int		id;
 
 	end = false;
 	first = NULL;
+	nb_tetri = 0;
 	while (!end)
 	{
 		i = 0;
@@ -86,25 +87,13 @@ int		check_error_pieces(int fd)
 				return (free_list(&first));
 			i++;
 		}
-		if (!ft_check_line(lst->str) || !(ret = read_line(fd, NULL, 1)))
+		nb_tetri++;
+		if (!ft_check_line(lst->str) || !(ret = read_line(fd, NULL, 1)) || !(lst->id = pieces_identification(lst->str)))
 			return (free_list(&first));
+		//ft_putnbr(lst->id);
+		//ft_putchar('\n');
 		if (ret == 2)
 			end = true;
-	}
-	while (first)
-	{
-		n = 0;
-		tab = (int*)malloc(sizeof(int) * 4);
-		ft_putendl(first->str);
-		tab = pieces_identification(first->str, tab);
-		while (n < 4)
-		{
-			ft_putnbr(tab[n]);
-			n++;
-		}
-		ft_putchar('\n');
-		free(tab);
-		first = first->next;
 	}
 	free_list(&first);
 	return (1);

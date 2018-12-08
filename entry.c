@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:27:22 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/08 15:19:36 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/08 15:57:02 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 ssize_t		read_line(int fd, char **str, int n)
 {
-	char	buff[n];
+	char	buff[n + 1];
 	ssize_t	ret;
 	char 	*tmp;
 	char	*tmp2;
@@ -31,7 +31,7 @@ ssize_t		read_line(int fd, char **str, int n)
 	if (n == 5)
 	{
 		tmp = *str;
-		if (!(tmp2 = ft_strndup(buff, n - 1)))
+		if (!(tmp2 = ft_strndup(buff, n)))
 			return (0);
 		if (ft_strlen(buff) != 5 || !(*str = ft_strjoin(*str, tmp2))) 
 			{
@@ -47,18 +47,24 @@ ssize_t		read_line(int fd, char **str, int n)
 
 int		ft_check_line(char *str)
 {
-	char	*ptr;
+	int		i;
 	int		nb_sharp;
 
 	nb_sharp = 0;
-	ptr = str;
-	while (ptr && *ptr)
+	while (str && *str)
 	{
-		if (*ptr != '#' && *ptr != '.')
-			return (0);
-		if (*ptr == '#')
-			nb_sharp++;
-		ptr++;
+		i = 0;
+		while (i < 4)
+		{
+			if (str[i] != '#' && str[i] != '.')
+				return (0);
+			if (str[i] == '#')
+				nb_sharp++;
+			i++;
+		}
+		if (str[i] != '\n')
+			return(0);
+		str = &str[i + 1];
 	}
 	return (nb_sharp == 4 ? 1 : 0);
 }
@@ -88,10 +94,11 @@ int		check_error_pieces(int fd)
 			i++;
 		}
 		nb_tetri++;
+		//ft_putstr(lst->str);
 		if (!ft_check_line(lst->str) || !(ret = read_line(fd, NULL, 1)) || !(lst->id = pieces_identification(lst->str)))
 			return (free_list(&first));
-		//ft_putnbr(lst->id);
-		//ft_putchar('\n');
+		ft_putnbr(lst->id);
+		ft_putchar('\n');
 		if (ret == 2)
 			end = true;
 	}

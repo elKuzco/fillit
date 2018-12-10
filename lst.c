@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:06:23 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/08 14:21:40 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/09 17:35:32 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		create_lst(t_lst_f **first, t_lst_f **lst)
 	if (!*first)
 	{
 		if (!(*lst = (t_lst_f*)malloc(sizeof(t_lst_f))))
-			return(0);
+			return (0);
 		(*lst)->str = NULL;
 		(*lst)->next = NULL;
 		(*lst)->prev = NULL;
@@ -37,16 +37,16 @@ int		create_lst(t_lst_f **first, t_lst_f **lst)
 		(*lst)->str = NULL;
 		(*lst)->next = NULL;
 		if (!((*lst)->str = ft_strnew(0)))
-			return(0);
+			return (0);
 	}
 	return (1);
 }
 
-int	free_list(t_lst_f **first) 
+int		free_list(t_lst_f **first)
 {
 	t_lst_f *tmp;
-	
-	while(first && *first)
+
+	while (first && *first)
 	{
 		tmp = (*first)->next;
 		if ((*first)->str)

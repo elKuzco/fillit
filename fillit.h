@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 15:19:26 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/10 12:05:13 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/10 21:12:19 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,18 @@ typedef struct	s_fillit
 
 }				t_lst_f;
 
-int				check_error_pieces(int fd, t_lst_f **first, int *nb_tetri);
-int				ft_check_line(char *str);
+int				check_entry(int fd, t_lst_f **first, int *nb_tetri);
+int				check_piece(char *str);
 int				create_lst(t_lst_f **lst, t_lst_f**first);
 int				free_list(t_lst_f **first);
 int				pieces_identification(char *str);
-int				make_id(char **str, int jump);
+char			*make_id(char **str, int jump);
 int				trim(char *str);
 ssize_t			read_line(int fd, char **str, int n);
 int				compare_id(char *str);
+int				verif_id(char *id);
+void			print_tab(char **tab);
+char    		**create_tab(int x, int y);
+int				fillit(t_lst_f *first, int nb_tetri);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:27:22 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/10 12:09:25 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/10 20:44:28 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,35 @@ ssize_t		read_line(int fd, char **str, int n)
 	return ((ret != 5 && ret != 1) || buff[n - 1] != '\n' ? 0 : 1);
 }
 
-int			ft_check_line(char *str)
+int		check_piece(char *str)
 {
-	if (ft_strnb_c(str, '#') != 4)
-		return (0);
-	while (str && *str)
+	int	connected;
+	int	sharp;
+	int i;
+
+	sharp = 0;
+	while (*str)
 	{
-		if (!ft_strn_is(str, "#.", 4) || str[4] != '\n')
+		i = 0;
+		connected = 0;
+		while (i < 4)
+		{
+			if (str[i] != '#' && str[i] != '.')
+				return (0);
+			if (str[i] == '#')
+				sharp++;
+			if (str[i] == '#' && str[5] && str[i + 5] == '#')
+				connected = 1;
+			i++;
+		}
+		if (*(str + 4) != '\n' || (sharp && sharp != 4 && !connected))
 			return (0);
 		str += 5;
 	}
-	return (1);
+	return (sharp == 4 ? 1 : 0);
 }
 
-int			check_error_pieces(int fd, t_lst_f **first, int *nb_tetri)
+int			check_entry(int fd, t_lst_f **first, int *nb_tetri)
 {
 	int		i;
 	int		ret;
@@ -72,10 +87,10 @@ int			check_error_pieces(int fd, t_lst_f **first, int *nb_tetri)
 		while (++i < 4)
 			if (!(ret = read_line(fd, &lst->str, 5)))
 				return (free_list(first));
-		if (!ft_check_line(lst->str) || !(ret = read_line(fd, NULL, 1))
-		|| !(make_id(&lst->str, trim(lst->str)))|| !(compare_id(lst->str)))  
+		if (!check_piece(lst->str) || !(ret = read_line(fd, NULL, 1))
+		|| !(lst->str = make_id(&lst->str, trim(lst->str))) || !verif_id(lst->str) /*|| !compare_id(lst->str)*/)
 			return (free_list(first));
-		lst->num = *nb_tetri++;
+		lst->num = 'A' + *nb_tetri++;
 		if (ret == 2)
 			end = true;
 	}

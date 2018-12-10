@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:25:19 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/10 12:16:04 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/10 17:35:33 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,19 @@ int		trim(char *str)
 		}
 		str++;
 	}
-	if (current < jump)
-		jump = current;
-	return (jump);
+	return (current < jump ? jump = current : jump);
 }
 
-int		make_id(char **str, int jump)
+char	*make_id(char **str, int jump)
 {
 	char    *tmp;
 	char    *id;
 	int     i;
 	int     j;
 
-	if (!(id = (char*)malloc(sizeof(char) * 5)))
-		return (0);
 	tmp = *str;
+	if (!(id = (char*)malloc(sizeof(char) * 5)))
+		return (NULL);
 	j = 0;
 	i = 0;
 	*str += jump;
@@ -99,13 +97,29 @@ int		make_id(char **str, int jump)
 		(*str)++;
 	}
 	id[j] = '\0';
-	*str = id;
 	free(tmp);
+	return (id);
+}
+
+int	verif_id(char *id)
+{
+	int i;
+
+	i = 1;
+	while (id[i])
+	{
+		if (id[i] - 1 > id[i - 1])
+			return (0);
+		i++;
+	}
 	return (1);
 }
 
- int	compare_id(char *str)
- {
+
+
+/*
+int	compare_id(char *str)
+{
 	 int i;
 	 char *id_ref[] = {"0000", "0123", "0101", "0121", "1012", "0010", "1011", "0012", "0120", "0122", "2012",
 "0111", "1101", "0100", "0001", "0112", "1010", "1201", "0011"};
@@ -124,4 +138,4 @@ int		make_id(char **str, int jump)
 	printf("######## INVALID CHECK##############\n");
 	return (0); 
  }
-
+*/

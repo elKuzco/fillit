@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 15:19:26 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/09 17:35:24 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/10 12:05:13 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int				pieces_identification(char *str);
 int				make_id(char **str, int jump);
 int				trim(char *str);
 ssize_t			read_line(int fd, char **str, int n);
+int				compare_id(char *str);
 
 #endif

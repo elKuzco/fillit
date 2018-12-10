@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:27:22 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/09 17:40:21 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/10 12:09:25 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,18 @@ int			check_error_pieces(int fd, t_lst_f **first, int *nb_tetri)
 			if (!(ret = read_line(fd, &lst->str, 5)))
 				return (free_list(first));
 		if (!ft_check_line(lst->str) || !(ret = read_line(fd, NULL, 1))
-		|| !(make_id(&lst->str, trim(lst->str))))
+		|| !(make_id(&lst->str, trim(lst->str)))|| !(compare_id(lst->str)))  
 			return (free_list(first));
 		lst->num = *nb_tetri++;
 		if (ret == 2)
 			end = true;
+	}
+	lst = *first;
+	
+	while (lst)
+	{
+			ft_putendl(lst->str);
+			lst = lst->next;
 	}
 	return (1);
 }

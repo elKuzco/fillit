@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:06:23 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/09 17:35:32 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/11 17:05:10 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int		create_lst(t_lst_f **first, t_lst_f **lst)
 		(*lst)->str = NULL;
 		(*lst)->next = NULL;
 		(*lst)->prev = NULL;
+		(*lst)->x = 0;
+		(*lst)->y = 0;
 		if (!((*lst)->str = ft_strnew(0)))
 			return (0);
 		*first = *lst;
@@ -36,6 +38,8 @@ int		create_lst(t_lst_f **first, t_lst_f **lst)
 		*lst = (*lst)->next;
 		(*lst)->str = NULL;
 		(*lst)->next = NULL;
+		(*lst)->x = 0;
+		(*lst)->y = 0;
 		if (!((*lst)->str = ft_strnew(0)))
 			return (0);
 	}

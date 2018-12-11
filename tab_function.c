@@ -6,69 +6,176 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 13:46:04 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/11 13:14:05 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/11 17:06:00 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdlib.h>
+#include "libft/libft.h"
 
-int	g_tab_size;
+extern size_t g_tab_size;
 
-char    **create_tab(int x, int y)
+char    **create_tab(void)
 {
-    int    row;
-    int    column;
+    size_t    row;
+    size_t    column;
     char **tab;
     
-    if (!(tab =(char **)malloc(sizeof(char *) * (y + 1))))
+    if (!(tab =(char **)malloc(sizeof(char *) * (g_tab_size))))
       return (0);
     row = 0;
     column = 0;
-    while(row < y + 1)
+    while(row < g_tab_size)
     {
-      if (!(tab[row] = (char *)malloc(sizeof(char) * x + 1)))
-          return (0);
-    while(column < x + 1)
-    {
-        if (column == x || (row == y))
-          tab[row][column] = '-';
-        else 
-          tab[row][column] = '0';
-        column++;
-    }
-    column = 0;
-    row++;
+	      if (!(tab[row] = (char *)malloc(sizeof(char) * g_tab_size)))
+	          return (0);
+	    while(column < g_tab_size)
+	    {
+	        tab[row][column] = '.';
+	        column++;
+			
+	    }
+	    column = 0;
+	    row++;
     }
     return (tab);
 }
-
 int		check_place(int x, int y, char **tab, char c)
 {
-	printf("####### CHECK PLACE #########\n");
-	if (tab[y][x] == '0')
+	if (tab[x][y] == '.')
 	{
-		tab[y][x] = c;
+		tab[x][y] = c;
 		return (1);
 	}
 	return (0);
 }
 
-void    clear_tab(char **tab, int y)
+void    clear_tab(char **tab)
 {
-    int i;
-    
-    i = 0;
-    while (i < y + 1)
-    {
-		printf("####### CLEAR TAB #########\n");
-        free(tab[i]);
-        i++;
-    }
-    free(tab);
-    return ;
+    size_t y;
+	    y = 0;
+	    while (y < g_tab_size)
+	    {
+	        free(tab[y]);
+	        y++;
+	    }
+	    free(tab);
 }
-/* Fonction pour remplir le tableau avec une piece, 
+
+int		clean_piece(char **tab, int x, int y, t_lst_f *lst)
+{
+	int i;
+	int tab_y;
+
+	i = 0;
+	tab_y = y;
+	while (lst->str[i])
+	{
+		if (i > 0 && (lst->str[i - 1]) >= lst->str[i])
+			tab_y++;
+		if (tab[x + lst->str[i] - '0'][tab_y] != lst->num) // 
+			break;
+		tab[x + lst->str[i] - '0'][tab_y] = '.';
+		i++;
+	}
+	return (0);
+}
+
+int  insert_in_tab(char **tab, int x, int y, t_lst_f *lst)
+{
+	int i;
+	int tab_y;
+
+	i = 0;
+	tab_y = y;
+	while (lst->str[i])
+	{
+		if (i > 0 && lst->str[i - 1] >= lst->str[i])
+			tab_y++;
+		if (!check_place((x + lst->str[i] - '0'), tab_y, tab, lst->num))
+			return (clean_piece(tab, x, y, lst));
+		i++;
+	}
+	lst->x = x;
+	lst->y = y;
+	return (1);
+}
+
+int	fillit(t_lst_f *lst, char **tab)
+{
+	t_bool	placeable;
+
+	if (!tab)
+		if(!(tab = create_tab()))
+			return (0);
+	while (lst)
+	{
+		placeable = true;
+		while (placeable && !insert_in_tab(tab, lst->x, lst->y, lst))
+		{
+			if (lst->x < g_tab_size - 1)
+				lst->x++;
+			else if (lst->y < g_tab_size - 1)
+			{
+				lst->y++;
+				lst->x = 0;
+			}
+			else
+				placeable = false;
+		}
+		if (!placeable)
+		{		
+			lst->x = 0;
+			lst->y = 0;
+			if (lst->prev)
+			{
+				lst = lst->prev;
+				clean_piece(tab, lst->x, lst->y, lst);
+				if (lst->x < g_tab_size - 1)
+					lst->x++;
+				else if (lst->y++ < g_tab_size - 1)
+					lst->x = 0;
+			}
+			else
+			{
+				if (tab)
+					clear_tab(tab);
+				g_tab_size++;
+				printf("g_tab = %zu\n",g_tab_size);
+				if (!(tab = create_tab()))
+					return(0);
+			}
+			fillit(lst, tab);
+		}
+		lst = lst->next;
+	}
+	print_tab(tab);
+			printf("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+	if (tab)
+		clear_tab(tab);
+	return (1);
+}
+
+
+
+/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fonction pour remplir le tableau avec une piece, 
 il reste a modifier le code pour 
 - qu'elle accepte les listes chaines
 - qu'elle verifie l'emplacement
@@ -106,54 +213,3 @@ int  insert_in_tab(char **tab, int x, int y, t_lst_f *lst)
   return (1);
 }
 */
-int		clean_piece(char **tab, int x, int y, t_lst_f *lst)
-{
-	int i;
-	int tab_y;
-
-	printf("####### CLEAN PIECE #########\n");
-	i = 0;
-	tab_y = y;
-	while (lst->str[i])
-	{
-		if (i > 0 && (lst->str[i - 1]) >= lst->str[i])
-			tab_y++;
-		if (tab[tab_y][x + lst->str[i] - '0'] != lst->num) // 
-			break;
-		tab[tab_y][x + lst->str[i] - '0'] = '0';
-		i++;
-	}
-	return (0);
-}
-
-int  insert_in_tab(char **tab, int x, int y, t_lst_f *lst)
-{
-	int i;
-	int tab_y;
-
-	printf("####### INSERT TAB #########\n");
-	i = 0;
-	tab_y = y;
-	while (lst->str[i])
-	{
-		if (i > 0 && lst->str[i - 1] >= lst->str[i])
-			tab_y++;
-		if (!check_place((x + lst->str[i] - '0'), tab_y, tab, lst->num))
-			return (clean_piece(tab, x, y, lst));
-		i++;
-	}
-	return (1);
-}
-
-int	fillit(t_lst_f *first, int nb_tetri)
-{
-	char **tab;
-	
-	tab = create_tab(8, 8);
-	insert_in_tab(tab, 0, 4, first);
-	insert_in_tab(tab, 0, 3, first->next);
-	print_tab(tab);
-	//clear_tab(tab, nb_tetri);
-	//	return (0);
-	return (1);
-}

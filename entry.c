@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:27:22 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/11 13:15:50 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/11 17:05:10 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "libft/libft.h"
 #include "fillit.h"
 #include <stdlib.h>
+
+extern size_t g_tab_size;
 
 ssize_t		read_line(int fd, char **str, int n)
 {
@@ -71,7 +73,7 @@ int		check_piece(char *str)
 	return (sharp == 4 ? 1 : 0);
 }
 
-int			check_entry(int fd, t_lst_f **first, int *nb_tetri)
+int			check_entry(int fd, t_lst_f **first, size_t *nb_tetri)
 {
 	int		i;
 	int		ret;
@@ -94,13 +96,13 @@ int			check_entry(int fd, t_lst_f **first, int *nb_tetri)
 		if (ret == 2)
 			end = true;
 	}
-	lst = *first;
+	/*lst = *first;
 	
 	while (lst)
 	{
 			ft_putendl(lst->str);
 			lst = lst->next;
-	}
-	//g_tab_size = nb_tetri;
+	}*/
+	g_tab_size = *nb_tetri;
 	return (1);
 }

@@ -6,29 +6,31 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 20:46:59 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/11 13:15:27 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/11 17:05:13 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
+#include "fillit.h"
+
+extern size_t g_tab_size;
 
 void	print_tab(char **tab)
 {
-	int i;
-	int	j;
-	
-	i = 0;
-	j = 0;
-	while (tab[j][0] != '-')
+	size_t	x;
+	size_t	y;
+
+	x = 0;
+	y = 0;
+	while (y < g_tab_size)
 	{
-		while (tab[j][i] != '-')
-			{
-				ft_putchar(tab[j][i]);
-				i++;
-			}
+		while (x < g_tab_size)
+		{
+			ft_putchar(tab[x][y]);
+			x++;
+		}
 		ft_putchar('\n');
-		i = 0;
-		j++;
+		x = 0;
+		y++;
 	}
-	
 }

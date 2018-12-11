@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 20:46:59 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/10 21:26:27 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/11 13:15:27 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_tab(char **tab)
 	{
 		while (tab[j][i] != '-')
 			{
-				ft_putchar(tab[j][j]);
+				ft_putchar(tab[j][i]);
 				i++;
 			}
 		ft_putchar('\n');

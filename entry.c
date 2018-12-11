@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:27:22 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/10 20:44:28 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/11 13:15:50 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int			check_entry(int fd, t_lst_f **first, int *nb_tetri)
 				return (free_list(first));
 		if (!check_piece(lst->str) || !(ret = read_line(fd, NULL, 1))
 		|| !(lst->str = make_id(&lst->str, trim(lst->str))) || !verif_id(lst->str) /*|| !compare_id(lst->str)*/)
-			return (free_list(first));
-		lst->num = 'A' + *nb_tetri++;
+			return (free_list(first));	
+		lst->num = 'A' + (*nb_tetri)++;
 		if (ret == 2)
 			end = true;
 	}
@@ -101,5 +101,6 @@ int			check_entry(int fd, t_lst_f **first, int *nb_tetri)
 			ft_putendl(lst->str);
 			lst = lst->next;
 	}
+	//g_tab_size = nb_tetri;
 	return (1);
 }

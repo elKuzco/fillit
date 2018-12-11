@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:09:14 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/11 17:05:11 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/11 20:20:35 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,15 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		ft_putendl("usage: ./fillit Valid_Tetriminos_File");
 	else if ((fd = open(av[1], O_RDONLY)) == -1
-	|| !(check_entry(fd, &first, &nb_tetri)) || !fillit(first, tab))
+	|| !(check_entry(fd, &first, &nb_tetri)))
+	{
 		ft_putendl("error");
-	return (0);
+		return (0);
+	}
+		
+	if (!fillit(first, tab))
+	{
+		ft_putendl("error");
+		return (0);
+	}
 }

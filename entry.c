@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:27:22 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/11 17:05:10 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/11 20:20:38 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,9 @@ int			check_entry(int fd, t_lst_f **first, size_t *nb_tetri)
 			ft_putendl(lst->str);
 			lst = lst->next;
 	}*/
-	g_tab_size = *nb_tetri;
+//	if (nb_tetri > 26)
+//		return (0);
+	//g_tab_size = *nb_tetri;
+	g_tab_size = 1;
 	return (1);
 }

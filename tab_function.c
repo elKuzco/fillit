@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 13:46:04 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/11 17:06:00 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/11 21:14:09 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ char    **create_tab(void)
     }
     return (tab);
 }
-int		check_place(int x, int y, char **tab, char c)
+int		check_place(size_t x, size_t y, char **tab, char c)
 {
-	if (tab[x][y] == '.')
+	printf("x : %zu  | y : %zu |tab = %zu \n", x, y, 	g_tab_size);
+	if (x < g_tab_size && y < g_tab_size && tab[x][y] == '.')
 	{
+		printf("on pose le #\n");
 		tab[x][y] = c;
 		return (1);
 	}
@@ -53,28 +55,30 @@ int		check_place(int x, int y, char **tab, char c)
 
 void    clear_tab(char **tab)
 {
-    size_t y;
+    /*size_t y;
 	    y = 0;
 	    while (y < g_tab_size)
 	    {
-	        free(tab[y]);
+			//if (tab[y])
+	        	//free(tab[y]);
 	        y++;
 	    }
-	    free(tab);
+	    if (tab)
+			free(tab);*/
 }
 
-int		clean_piece(char **tab, int x, int y, t_lst_f *lst)
+int		clean_piece(char **tab, size_t x, size_t y, t_lst_f *lst)
 {
 	int i;
-	int tab_y;
-
+	size_t tab_y;
 	i = 0;
 	tab_y = y;
 	while (lst->str[i])
 	{
 		if (i > 0 && (lst->str[i - 1]) >= lst->str[i])
 			tab_y++;
-		if (tab[x + lst->str[i] - '0'][tab_y] != lst->num) // 
+		if ((x + lst->str[i] - '0') >= g_tab_size || tab_y >= g_tab_size
+		|| tab[x + lst->str[i] - '0'][tab_y] != lst->num) // 
 			break;
 		tab[x + lst->str[i] - '0'][tab_y] = '.';
 		i++;
@@ -82,10 +86,10 @@ int		clean_piece(char **tab, int x, int y, t_lst_f *lst)
 	return (0);
 }
 
-int  insert_in_tab(char **tab, int x, int y, t_lst_f *lst)
+int  insert_in_tab(char **tab, size_t x, size_t y, t_lst_f *lst)
 {
 	int i;
-	int tab_y;
+	size_t	tab_y;
 
 	i = 0;
 	tab_y = y;
@@ -111,9 +115,11 @@ int	fillit(t_lst_f *lst, char **tab)
 			return (0);
 	while (lst)
 	{
-		placeable = true;
-		while (placeable && !insert_in_tab(tab, lst->x, lst->y, lst))
+		placeable = true;// Placeable toujours vrai dans la condition
+		while (placeable == true && !insert_in_tab(tab, lst->x, lst->y, lst))
 		{
+			if (g_tab_size > 6)
+				printf(" #BEFORE#\n tab %zu:| x :%zu | y :%zu | lst = %c \n", g_tab_size, lst->x, lst->y, lst->num);
 			if (lst->x < g_tab_size - 1)
 				lst->x++;
 			else if (lst->y < g_tab_size - 1)
@@ -122,9 +128,13 @@ int	fillit(t_lst_f *lst, char **tab)
 				lst->x = 0;
 			}
 			else
+			{
 				placeable = false;
+				if (g_tab_size > 6)
+					printf(" #star#\ntab %zu:| x : %zu | y :%zu | lst = %c \n", g_tab_size, lst->x, lst->y, lst->num);
+			}
 		}
-		if (!placeable)
+		if (placeable == false)
 		{		
 			lst->x = 0;
 			lst->y = 0;
@@ -139,21 +149,27 @@ int	fillit(t_lst_f *lst, char **tab)
 			}
 			else
 			{
-				if (tab)
-					clear_tab(tab);
+				//if (tab)
+					//clear_tab(tab);
 				g_tab_size++;
-				printf("g_tab = %zu\n",g_tab_size);
 				if (!(tab = create_tab()))
 					return(0);
 			}
 			fillit(lst, tab);
+			lst = NULL;
 		}
-		lst = lst->next;
+		else
+			lst = lst->next;
 	}
-	print_tab(tab);
-			printf("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
-	if (tab)
-		clear_tab(tab);
+	if (placeable)
+	{
+		if (tab)
+		{
+			print_tab(tab);
+			//clear_tab(tab);
+		}
+		
+	}
 	return (1);
 }
 

@@ -6,19 +6,19 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 20:46:59 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/11 20:20:34 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/14 18:03:49 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "fillit.h"
 
-extern size_t g_tab_size;
+extern int g_tab_size;
 
-void	print_tab(char **tab)
+void	print_tab(char **tab, int g_tab_size)
 {
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 
 	x = 0;
 	y = 0;

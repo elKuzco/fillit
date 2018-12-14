@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:27:22 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/11 20:20:38 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/14 16:51:24 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "fillit.h"
 #include <stdlib.h>
 
-extern size_t g_tab_size;
+extern int g_tab_size;
 
-ssize_t		read_line(int fd, char **str, int n)
+int		read_line(int fd, char **str, int n)
 {
 	char	buff[n + 1];
 	ssize_t	ret;
@@ -73,7 +73,7 @@ int		check_piece(char *str)
 	return (sharp == 4 ? 1 : 0);
 }
 
-int			check_entry(int fd, t_lst_f **first, size_t *nb_tetri)
+int			check_entry(int fd, t_lst_f **first, int *nb_tetri)
 {
 	int		i;
 	int		ret;

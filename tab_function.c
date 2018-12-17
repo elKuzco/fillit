@@ -63,7 +63,7 @@ int		clean_piece(char **tab, t_lst_f *lst, int g_tab_size)
 
 	i = 0;
 	tab_y = 0;
-	while (lst->str[i])
+	while (i < 4)
 	{
 		if (i > 0 && lst->str[i - 1] >= lst->str[i])
 			tab_y++;
@@ -84,7 +84,7 @@ int  insert_in_tab(char **tab, t_lst_f *lst, int g_tab_size)
 
 	i = 0;
 	tab_y = 0;
-	while (lst->str[i])
+	while (i < 4)
 	{
 		if (i > 0 && lst->str[i - 1] >= lst->str[i])
 			tab_y++;
@@ -96,96 +96,4 @@ int  insert_in_tab(char **tab, t_lst_f *lst, int g_tab_size)
 	}
 	return (1);
 }
-/*
-int fillit (t_lst_f *lst, char **tab, int g_tab_size)
-{
-	if (!tab)
-		if(!(tab = create_tab(g_tab_size)))
-			return (0);
-	if (!lst)
-	{
-		print_tab(tab, g_tab_size);
-		clear_tab(tab, g_tab_size);
-		return true;
-	}
-	while(lst->x < g_tab_size && lst->y < g_tab_size)
-	{
-		if (insert_in_tab(tab, lst, g_tab_size))
-			return(fillit(lst->next, tab, g_tab_size));
-		if (lst->x < g_tab_size - 1)
-			lst->x += 1;
-		else if (lst->y < g_tab_size - 1)
-		{
-			lst->x = 0;
-			lst->y++;
-		}
-	}
-	if(lst->prev == NULL)
-	{
-		g_tab_size++;
-		return(fillit(lst, tab, g_tab_size));
-		
-	}
-	return(false);
-}
-*/
 
-int	fillit(t_lst_f *lst, char **tab, int g_tab_size)
-{
-	t_bool	placeable;
-
-	if (!tab)
-		if(!(tab = create_tab(g_tab_size)))
-			return (0);
-	placeable = true;
-	while (lst && placeable == true)
-	{
-		while (placeable == true && !insert_in_tab(tab, lst, g_tab_size))
-		{
-			if (lst->x < g_tab_size - 1)
-				lst->x += 1;
-			else if (lst->y < g_tab_size - 1)
-			{
-				lst->x = 0;
-				lst->y++;
-			}
-			else
-				placeable = false;
-		}
-		if (placeable == false)
-		{
-			lst->x = 0;
-			lst->y = 0;
-			if (lst->prev)
-			{
-				lst = lst->prev;
-				clean_piece(tab, lst, g_tab_size);
-				if (lst->x < g_tab_size - 1)
-					lst->x++;
-				else if (lst->y < g_tab_size - 1)
-				{
-						lst->x = 0;
-						lst->y++;
-				}
-				placeable = true;
-			}
-			else
-			{
-				if (tab)
-					clear_tab(tab, g_tab_size);
-				g_tab_size++;
-				if (!(tab = create_tab(g_tab_size)))
-					return(0);
-				fillit(lst, tab, g_tab_size);
-			}
-		}
-		else if (placeable == true)
-			lst = lst->next;
-	}
-	if (placeable == true && tab)
-	{
-		print_tab(tab, g_tab_size);
-		clear_tab(tab, g_tab_size);
-	}
-	return (1);
-}

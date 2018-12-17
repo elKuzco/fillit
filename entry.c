@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:27:22 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/14 16:51:24 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/17 15:55:25 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "libft/libft.h"
 #include "fillit.h"
 #include <stdlib.h>
-
-extern int g_tab_size;
 
 int		read_line(int fd, char **str, int n)
 {
@@ -90,22 +88,12 @@ int			check_entry(int fd, t_lst_f **first, int *nb_tetri)
 			if (!(ret = read_line(fd, &lst->str, 5)))
 				return (free_list(first));
 		if (!check_piece(lst->str) || !(ret = read_line(fd, NULL, 1))
-		|| !(lst->str = make_id(&lst->str, trim(lst->str))) || !verif_id(lst->str) /*|| !compare_id(lst->str)*/)
-			return (free_list(first));	
+		|| !(lst->str = make_id(&lst->str, trim(lst->str)))
+		|| !verif_id(lst->str))
+			return (free_list(first));
 		lst->num = 'A' + (*nb_tetri)++;
 		if (ret == 2)
 			end = true;
 	}
-	/*lst = *first;
-	
-	while (lst)
-	{
-			ft_putendl(lst->str);
-			lst = lst->next;
-	}*/
-//	if (nb_tetri > 26)
-//		return (0);
-	//g_tab_size = *nb_tetri;
-	g_tab_size = 1;
 	return (1);
 }

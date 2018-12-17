@@ -6,41 +6,12 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:25:19 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/11 20:20:39 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/17 16:13:46 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include <stdlib.h>
-
-/*int		endofpieces(char *str)
-{
-	int nb_sharp;
-	int i;
-
-	i = 0;
-	nb_sharp = 0;
-	while (nb_sharp < 4)
-	{
-		if (str[i] == '#')
-		nb_sharp++;
-		i++;
-	}
-	return (i);
-}
-
-char	**first_sharp(char **str)
-{
-	char	*ptr;
-
-	ptr = *str;
-	*str = ft_strchr(*str, '#');
-	while (**str != '\n' && ptr != *str)
-		(*str)--;
-	if (**str == '\n')
-		(*str)++;
-	return (str);
-}*/
 
 int		trim(char *str)
 {
@@ -79,12 +50,12 @@ char	*make_id(char **str, int jump)
 	int     j;
 
 	tmp = *str;
-	if (!(id = (char*)malloc(sizeof(char) * 5)))
+	if (!(id = (char*)malloc(sizeof(char) * 4)))
 		return (NULL);
 	j = 0;
 	i = 0;
 	*str += jump;
-	while (**str)
+	while (j < 4)
 	{
 		if (**str == '#')
 			id[j++] = i + '0';
@@ -96,7 +67,6 @@ char	*make_id(char **str, int jump)
 		}
 		(*str)++;
 	}
-	id[j] = '\0';
 	free(tmp);
 	return (id);
 }
@@ -106,7 +76,7 @@ int	verif_id(char *id)
 	int i;
 
 	i = 1;
-	while (id[i])
+	while (i < 4)
 	{
 		if (id[i] - 1 > id[i - 1])
 			return (0);
@@ -114,28 +84,3 @@ int	verif_id(char *id)
 	}
 	return (1);
 }
-
-
-
-/*
-int	compare_id(char *str)
-{
-	 int i;
-	 char *id_ref[] = {"0000", "0123", "0101", "0121", "1012", "0010", "1011", "0012", "0120", "0122", "2012",
-"0111", "1101", "0100", "0001", "0112", "1010", "1201", "0011"};
-	i = 0;
-	
-	while (i < 19)
-	{
-		printf("id actual:%s\ncurrent id check:%s\n",str,id_ref[i]);
-		if (!(ft_strcmp(str, id_ref[i])))
-		{
-			printf("######## VALID CHECK##############\n");
-			return(1);
-		}
-		i++;
-	}
-	printf("######## INVALID CHECK##############\n");
-	return (0); 
- }
-*/

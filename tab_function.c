@@ -4,16 +4,16 @@
 
 char    **create_tab(int g_tab_size)
 {
-    int 		row;
-    int			column;
-    char		**tab;
+	int 		row;
+	int			column;
+	char		**tab;
 
-    if (!(tab =(char**)malloc(sizeof(char*) * (g_tab_size))))
-      return (0);
-    row = 0;
-    column = 0;
-    while (row < g_tab_size)
-    {
+	if (!(tab =(char**)malloc(sizeof(char*) * (g_tab_size))))
+		return (0);
+	row = 0;
+	column = 0;
+	while (row < g_tab_size)
+	{
 		if (!(tab[row] = (char*)malloc(sizeof(char) * g_tab_size)))
 		{
 			while (--row)
@@ -21,15 +21,15 @@ char    **create_tab(int g_tab_size)
 			free(tab);
 			return (0);
 		}
-	    while (column < g_tab_size)
-	    {
-	        tab[row][column] = '.';
-	        column++;
-	    }
-	    column = 0;
-	    row++;
-    }
-    return (tab);
+		while (column < g_tab_size)
+		{
+			tab[row][column] = '.';
+			column++;
+		}
+		column = 0;
+		row++;
+	}
+	return (tab);
 }
 
 int		check_place(int x, int y, char **tab, char c)
@@ -96,4 +96,3 @@ int  insert_in_tab(char **tab, t_lst_f *lst, int g_tab_size)
 	}
 	return (1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 11:36:28 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/17 19:10:51 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/18 14:46:48 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int increase_position(t_lst_f *lst, int g_tab_size)
 	return (0);
 }
 
-int	increase_map(char ****tab, int *g_tab_size, t_lst_f *lst)
+int	increase_map(char ****tab, int *g_tab_size)
 {
 	if (tab)
 		clear_tab(**tab, *g_tab_size);
@@ -80,7 +80,7 @@ int	backtracking(char ***tab, int *g_tab_size, t_lst_f **lst)
 	}
 	else
 	{
-		if (!increase_map(&tab, g_tab_size, *lst))
+		if (!increase_map(&tab, g_tab_size))
 			return(0);
 	}
 	return (1);

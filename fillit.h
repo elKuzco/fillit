@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 15:19:26 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/17 16:06:01 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/18 13:56:09 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef struct	s_fillit
 	char			num;
 	int			x;
 	int			y;
-
 }				t_lst_f;
+
 int				check_entry(int fd, t_lst_f **first, int *nb_tetri);
 int				check_piece(char *str);
 int				create_lst(t_lst_f **lst, t_lst_f**first);

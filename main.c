@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:09:14 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/17 16:08:41 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/18 14:47:13 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@
 #include "libft/libft.h"
 #include "fillit.h"
 
+int        rounded(double nb)
+{
+	if((nb - (int)nb) == 0)
+		return(nb);
+	nb++;
+	
+	return(nb);
+}
+
+int		initial_map_size(int nb)
+{
+	ft_sqrt(nb);
+	return(rounded(nb));
+}
+
 int		main(int ac, char **av)
 {
 	int			fd;
@@ -26,7 +41,7 @@ int		main(int ac, char **av)
 	char 		**tab;
 	int			g_tab_size;
 
-	g_tab_size = 2;
+	g_tab_size = 0;
 	fd = -1;
 	first = NULL; 
 	nb_tetri = 0;
@@ -35,11 +50,20 @@ int		main(int ac, char **av)
 		ft_putendl("usage: ./fillit Valid_Tetriminos_File");
 	else if ((fd = open(av[1], O_RDONLY)) == -1)
 		ft_putendl("error");
-	else if (!(check_entry(fd, &first, &nb_tetri))
-	|| !fillit(first, tab, g_tab_size))
+	else if (!(check_entry(fd, &first, &nb_tetri)))
 	{
 		ft_putendl("error");
 		close(fd);
+	}
+	else
+	{
+	g_tab_size = rounded(2 * ft_sqrt(nb_tetri));
+	//printf("%i\n", g_tab_size);
+	if (!fillit(first, tab, g_tab_size))
+	{
+		ft_putendl("error");
+		close(fd);
+	}
 	}
 	return (0);
 }

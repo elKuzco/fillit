@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 15:19:26 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/18 18:03:38 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:46:01 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int				trim(char *str);
 int				read_line(int fd, char **str, int n);
 int				compare_id(char *str);
 int				verif_id(char *id);
-void			print_tab(char **tab, int g_tab_size);
-char    		**create_tab(int g_tab_size);
-int				fillit(t_lst_f *lst, char **tab, int g_tab_size);
-void    		clear_tab(char **tab, int g_tab_size);
-int 			increase_position(t_lst_f *lst, int g_tab_size);
-int  			insert_in_tab(char **tab, t_lst_f *lst, int g_tab_size);
-int				clean_piece(char **tab, t_lst_f *lst, int g_tab_size);
+void			print_tab(char **tab, int tab_size);
+char			**create_tab(int tab_size);
+int				fillit(t_lst_f *lst, char **tab, int tab_size);
+void			clear_tab(char **tab, int tab_size);
+int				increase_position(t_lst_f *lst, int tab_size);
+int				insert_in_tab(char **tab, t_lst_f *lst, int tab_size);
+int				clean_piece(char **tab, t_lst_f *lst, int tab_size);
 t_lst_f			*have_identical(t_lst_f **lst);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:27:22 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/18 17:19:14 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:45:57 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		check_piece(char *str)
 	return (sharp == 4 ? 1 : 0);
 }
 
-int			check_entry(int fd, t_lst_f **first, int *nb_tetri)
+int		check_entry(int fd, t_lst_f **first, int *nb_tetri)
 {
 	int		i;
 	int		ret;

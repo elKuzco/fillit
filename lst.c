@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:06:23 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/18 16:40:57 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:45:59 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,6 @@
 #include <stdlib.h>
 #include "libft/libft.h"
 #include "fillit.h"
-/*
-int		create_lst(t_lst_f **first, t_lst_f **lst)
-{
-	if (!*first)
-	{
-		if (!(*lst = (t_lst_f*)malloc(sizeof(t_lst_f))))
-			return (0);
-		(*lst)->str = NULL;
-		(*lst)->next = NULL;
-		(*lst)->prev = NULL;
-		(*lst)->x = 0;
-		(*lst)->y = 0;
-		(*lst)->one = true;
-		if (!((*lst)->str = ft_strnew(0)))
-			return (0);
-		*first = *lst;
-	}
-	else
-	{
-		if (!((*lst)->next = (t_lst_f*)malloc(sizeof(t_lst_f))))
-			return (0);
-		((*lst)->next)->prev = *lst;
-		*lst = (*lst)->next;
-		(*lst)->str = NULL;
-		(*lst)->next = NULL;
-		(*lst)->x = 0;
-		(*lst)->y = 0;
-		(*lst)->one = true;
-		if (!((*lst)->str = ft_strnew(0)))
-			return (0);
-	}
-	return (1);
-}*/
 
 int		create_lst(t_lst_f **first, t_lst_f **lst)
 {
@@ -55,7 +22,7 @@ int		create_lst(t_lst_f **first, t_lst_f **lst)
 		if (!((*lst)->next = (t_lst_f*)malloc(sizeof(t_lst_f))))
 			return (0);
 		((*lst)->next)->prev = *lst;
-		(*lst) = (*lst)->next;	
+		(*lst) = (*lst)->next;
 	}
 	else
 	{
@@ -63,14 +30,14 @@ int		create_lst(t_lst_f **first, t_lst_f **lst)
 			return (0);
 		(*lst)->prev = NULL;
 		*first = *lst;
-	}	
-		(*lst)->str = NULL;
-		(*lst)->next = NULL;	
-		(*lst)->x = 0;
-		(*lst)->y = 0;
-		(*lst)->twin = NULL;
-		if (!((*lst)->str = ft_strnew(0)))
-			return (0);
+	}
+	(*lst)->str = NULL;
+	(*lst)->next = NULL;
+	(*lst)->x = 0;
+	(*lst)->y = 0;
+	(*lst)->twin = NULL;
+	if (!((*lst)->str = ft_strnew(0)))
+		return (0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:25:19 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/18 17:25:06 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:45:55 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		trim(char *str)
 		else if (*str == '\n')
 		{
 			if (current < jump)
-			jump = current;
+				jump = current;
 			current = 0;
 			sharp = false;
 		}
@@ -51,14 +51,10 @@ t_lst_f	*have_identical(t_lst_f **lst)
 	if (tmp->prev)
 	{
 		tmp = tmp->prev;
-		while(tmp)
+		while (tmp)
 		{
-			//ft_putendl("boucle have_identical");
-			if (!(ft_strcmp((*lst)->str,tmp->str)))
-			{
-				//ft_putendl("find a match");
-				return(tmp);
-			}
+			if (!(ft_strcmp((*lst)->str, tmp->str)))
+				return (tmp);
 			tmp = tmp->prev;
 		}
 	}
@@ -67,10 +63,10 @@ t_lst_f	*have_identical(t_lst_f **lst)
 
 char	*make_id(char **str, int jump)
 {
-	char    *tmp;
-	char    *id;
-	int     i;
-	int     j;
+	char	*tmp;
+	char	*id;
+	int		i;
+	int		j;
 
 	tmp = *str;
 	if (!(id = (char*)malloc(sizeof(char) * 4)))
@@ -94,7 +90,7 @@ char	*make_id(char **str, int jump)
 	return (id);
 }
 
-int	verif_id(char *id)
+int		verif_id(char *id)
 {
 	int i;
 

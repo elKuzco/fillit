@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:27:22 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/17 15:55:25 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/18 17:19:14 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int			check_entry(int fd, t_lst_f **first, int *nb_tetri)
 		|| !(lst->str = make_id(&lst->str, trim(lst->str)))
 		|| !verif_id(lst->str))
 			return (free_list(first));
+		lst->twin = have_identical(&lst);
 		lst->num = 'A' + (*nb_tetri)++;
 		if (ret == 2)
 			end = true;

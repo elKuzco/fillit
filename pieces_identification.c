@@ -6,12 +6,13 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:25:19 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/17 16:13:46 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/18 17:25:06 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include <stdlib.h>
+#include "fillit.h"
 
 int		trim(char *str)
 {
@@ -40,6 +41,28 @@ int		trim(char *str)
 		str++;
 	}
 	return (current < jump ? jump = current : jump);
+}
+
+t_lst_f	*have_identical(t_lst_f **lst)
+{
+	t_lst_f	*tmp;
+
+	tmp = *lst;
+	if (tmp->prev)
+	{
+		tmp = tmp->prev;
+		while(tmp)
+		{
+			//ft_putendl("boucle have_identical");
+			if (!(ft_strcmp((*lst)->str,tmp->str)))
+			{
+				//ft_putendl("find a match");
+				return(tmp);
+			}
+			tmp = tmp->prev;
+		}
+	}
+	return (NULL);
 }
 
 char	*make_id(char **str, int jump)

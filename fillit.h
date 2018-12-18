@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 15:19:26 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/18 13:56:09 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:03:38 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 # define FILLIT_H
 
 # include <string.h>
+# include "libft/libft.h"
+
 typedef struct	s_fillit
 {
 	char			*str;
 	struct s_fillit	*next;
 	struct s_fillit	*prev;
 	char			num;
-	int			x;
-	int			y;
+	int				x;
+	int				y;
+	struct s_fillit	*twin;
 }				t_lst_f;
 
 int				check_entry(int fd, t_lst_f **first, int *nb_tetri);
@@ -41,5 +44,6 @@ void    		clear_tab(char **tab, int g_tab_size);
 int 			increase_position(t_lst_f *lst, int g_tab_size);
 int  			insert_in_tab(char **tab, t_lst_f *lst, int g_tab_size);
 int				clean_piece(char **tab, t_lst_f *lst, int g_tab_size);
+t_lst_f			*have_identical(t_lst_f **lst);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 14:27:22 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/18 18:45:57 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/19 12:34:57 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		check_entry(int fd, t_lst_f **first, int *nb_tetri)
 	end = false;
 	while (!end)
 	{
-		if (!create_lst(first, &lst))
+		if ((*nb_tetri > 26) || !create_lst(first, &lst))
 			return (free_list(first));
 		i = -1;
 		while (++i < 4)

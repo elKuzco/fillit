@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 15:19:26 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/18 18:46:01 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/19 13:27:18 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int				increase_position(t_lst_f *lst, int tab_size);
 int				insert_in_tab(char **tab, t_lst_f *lst, int tab_size);
 int				clean_piece(char **tab, t_lst_f *lst, int tab_size);
 t_lst_f			*have_identical(t_lst_f **lst);
+int				initial_map_size(int nb);
 
 #endif

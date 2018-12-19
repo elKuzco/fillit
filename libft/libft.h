@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 11:42:52 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/17 19:28:22 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/19 12:56:45 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ int					get_next_line(const int fd, char **line);
 int					ft_strn_is(char *str, char *charset, size_t n);
 int					ft_strnb_c(char *str, char c);
 double				ft_sqrt(double nb);
+int					rounded_sup(double nb);
 
 #endif

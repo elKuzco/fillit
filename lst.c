@@ -6,7 +6,7 @@
 /*   By: qlouisia <qlouisia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:06:23 by qlouisia          #+#    #+#             */
-/*   Updated: 2018/12/18 18:45:59 by qlouisia         ###   ########.fr       */
+/*   Updated: 2018/12/19 12:38:49 by qlouisia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ int		free_list(t_lst_f **first)
 		tmp = (*first)->next;
 		if ((*first)->str)
 			free((*first)->str);
-		if (*first)
-			free(*first);
+		free(*first);
 		*first = tmp;
 	}
 	return (0);
